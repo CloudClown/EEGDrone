@@ -1,0 +1,19 @@
+<package>
+  <description brief="eeg_control">
+
+     eeg_control
+
+  </description>
+  <author>robo</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/eeg_control</url>
+  <depend package="rospy"/>
+  <depend package="roscpp"/>
+  <depend package="sensor_msgs"/>
+  <depend package="std_msgs"/>
+  <depend package="nav_msgs"/>
+
+</package>
+
+
