@@ -1,6 +1,6 @@
 <launch>
         <node pkg="ardrone_autonomy" type="ardrone_driver" required="true" output="screen" name="DroneDriver"/>
-        <node pkg="tum_ardrone" type="drone_stateestimation" required="true" respawn="true" output="screen" name="StateEstimator"/>
+        <node pkg="tum_ardrone" type="drone_stateestimation" required="true" output="screen" name="StateEstimator"/>
         <node pkg="tum_ardrone" type="drone_autopilot" output="screen" name="AutoPilot"/>
-        <node pkg="tum_ardrone" type="drone_gui" required="true" respawn="true" output="screen" name="GUI"/>
+        <node pkg="tum_ardrone" type="drone_gui" respawn="true" output="screen" name="GUI"/>
 </launch>

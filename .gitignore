@@ -2,3 +2,4 @@ ARDrone
 node_modules
 ardrone_autonomy/*
 tum_ardrone
+*.pyc
