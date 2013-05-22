@@ -6,3 +6,5 @@ tum_ardrone
 bin
 build
 lib
+msg_gen
+EEGControlMsgs/src
