@@ -13,4 +13,12 @@ import rospy
 
 class MindWaveControl():
     def __init__(self):
-        
+        rospy.init_node('MindwaveControl')
+        rospy.loginfo("Initializing Control")
+    def run(self):
+        pass
+
+if __name__ == '__main__':
+    try:
+        control = MindWaveControl()
+        control.run()
