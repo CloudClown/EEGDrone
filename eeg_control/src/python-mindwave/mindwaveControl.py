@@ -12,7 +12,8 @@ from parser import Parser
 import rospy
 import sys
 import roslib; roslib.load_manifest('EEGControlMsgs')
-from EEGControlMsgs.msgs import *
+from EEGControlMsgs.msg import *
+import time
 
 class Mindwave():
     def __init__(self):
@@ -27,8 +28,16 @@ class Mindwave():
             }
         
     def control(self):
-        pass
-
+        while not rospy.is_shutdown():
+            self.eegParser.update()
+            if self.eegParser.sending_data:
+                print >> sys.stdout, "meditation:", self.eegParser.current_meditation
+                print >> sys.stdout, "attention:", self.eegParser.current_attention
+                self.outputMap['attention'] = self.eegParser.current_attention
+                self.outputMap['meditation'] = self.eegParser.current_meditation
+                self.publish()
+                time.sleep(1)
+                
     def publish(self):
         self.controlOutput.attention = outputMap['attention']
         self.controlOutput.meditation = outputMap['meditation']
