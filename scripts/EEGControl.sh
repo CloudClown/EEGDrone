@@ -1,3 +1,3 @@
 #!/bin/bash
 
-roslaunch ../launch/EEGControl.launch
+roslaunch /home/robo/Projects/EEGDrone//launch/EEGControl.launch

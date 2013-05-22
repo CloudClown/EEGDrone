@@ -43,6 +43,9 @@ while True:
 	if p.sending_data:
 		iteration+=1
 		
+                print >> sys.stdout, "attention:",p.current_attention
+                print >> sys.stdout, "meditation:",p.current_meditation
+	                
 		flen = 50
 			
 		if len(p.raw_values)>=500:
@@ -67,7 +70,7 @@ while True:
 				pygame.draw.rect(window, color, (25+i*10,400-value, 5,value))
 		else:
 			pass
-		pygame.draw.circle(window,redColor, (800,200),p.current_attention/2)
+                pygame.draw.circle(window,redColor, (800,200),p.current_attention/2)
 		pygame.draw.circle(window,greenColor, (800,200),60/2,1)
 		pygame.draw.circle(window,greenColor, (800,200),100/2,1)
 		window.blit(attention_img, (760,260))

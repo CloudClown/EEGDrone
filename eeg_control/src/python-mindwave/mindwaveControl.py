@@ -36,11 +36,13 @@ class Mindwave():
                 self.outputMap['attention'] = self.eegParser.current_attention
                 self.outputMap['meditation'] = self.eegParser.current_meditation
                 self.publish()
-                time.sleep(1)
+            else:
+                print >> sys.stdout, "no data sent...reconnecting......"
+                eegParser.write_serial("\xc2")
                 
     def publish(self):
-        self.controlOutput.attention = outputMap['attention']
-        self.controlOutput.meditation = outputMap['meditation']
+        self.controlOutput.attention = self.outputMap['attention']
+        self.controlOutput.meditation = self.outputMap['meditation']
         self.controlPublisher.publish(self.controlOutput)
 
 if __name__ == '__main__':

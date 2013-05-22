@@ -1,3 +1,3 @@
 #!/bin/bash
 
-roslaunch ../launch/keyboardControl.launch
+roslaunch /home/robo/Projects/EEGDrone/launch/keyboardControl.launch
