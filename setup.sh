@@ -9,3 +9,5 @@ echo "downloading the tum package......"
 git clone git://github.com/tum-vision/tum_ardrone.git
 echo "rosmaking the tum package......."
 rosmake tum_ardrone
+rosmake eeg_control
+rosmake EEGControlMsgs
