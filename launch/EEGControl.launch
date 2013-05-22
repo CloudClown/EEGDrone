@@ -5,5 +5,5 @@
         <node pkg="tum_ardrone" type="drone_autopilot" output="screen" name="AutoPilot"/>
         <node pkg="tum_ardrone" type="drone_gui" respawn="true" output="screen" name="GUI"/>
         -->
-        <node pkg="eeg_control" type="mindwaveControl.py" respawn="true" name="mindwaveControl"/>
+        <node pkg="eeg_control" type="mindwaveControl.py" respawn="true" name="mindwaveControl" output="screen"/>
 </launch>
