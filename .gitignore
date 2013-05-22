@@ -3,3 +3,6 @@ node_modules
 ardrone_autonomy/*
 tum_ardrone
 *.pyc
+bin
+build
+lib
