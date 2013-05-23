@@ -24,7 +24,11 @@ class Mindwave():
         self.controlOutput = MindwaveControl()
         self.outputMap = {
             'attention':0,
-            'meditation':0
+            'meditation':0,
+            'alpha':0,
+            'beta':0,
+            'theta':0,
+            'gamma':0
             }
         
     def control(self):
@@ -43,7 +47,11 @@ class Mindwave():
     def publish(self):
         self.controlOutput.attention = self.outputMap['attention']
         self.controlOutput.meditation = self.outputMap['meditation']
-        self.controlPublisher.publish(self.controlOutput)
+        self.controlOutput.alpha = self.outputMap['alpha']
+        self.controlOutput.beta = self.outputMap['beta']
+        self.controlOutput.theta = self.outputMap['theta']
+        self.controlOutput.gamma = self.outputMap['gamma']
+        self.controluPblisher.publish(self.controlOutput)
 
 if __name__ == '__main__':
     try:
