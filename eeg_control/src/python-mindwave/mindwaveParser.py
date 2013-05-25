@@ -36,7 +36,7 @@ class Mindwave():
         self.relativeSpectrum
         self.spectra = []
         
-    def control(self):
+    def parse(self):
         while not rospy.is_shutdown():
             self.eegParser.update()
             if self.eegParser.sending_data:
@@ -93,6 +93,6 @@ class Mindwave():
 if __name__ == '__main__':
     try:
         control = Mindwave()
-        control.control()
+        control.parse()
     except rospy.ROSInterruptException:
         pass
