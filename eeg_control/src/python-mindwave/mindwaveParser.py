@@ -32,8 +32,6 @@ class Mindwave():
             'delta':0
             }
         self.capVal = 50
-        self.spectrum
-        self.relativeSpectrum
         self.spectra = []
         
     def parse(self):
@@ -47,18 +45,20 @@ class Mindwave():
                     self.outputMap['meditation'] = self.eegParser.current_meditation
                
                     #retrieve spectrum from the bin power function
-                    self.relativeSpectrum = bin_power(self.eegParser.raw_values[-self.eegParser.buffer_len:], range(self.capVal), 512)
-                    self.spectra.append(array(self.relativeSpectrum))
-                    if len(spectra) > 30:
-                        spectra.pop(0)
-                    self.spectrum = mean(array(spectra),axis=0)
+                    spectrum,relativeSpectrum = bin_power(self.eegParser.raw_values[-self.eegParser.buffer_len:], range(self.capVal), 512)
+                    self.spectra.append(array(relativeSpectrum))
+                    if len(self.spectra) > 30:
+                        self.spectra.pop(0)
+                    spectrum = mean(array(self.spectra),axis=0)
                     #temp variables
-                    delta = [0]
-                    theta = [0]
-                    alpha = [0]
-                    beta = [0]
-                    gamma = [0]
-                    if i in range(self.capVal -1):
+                    delta = []
+                    theta = []
+                    alpha = []
+                    beta = []
+                    gamma = []
+                    for i in range((self.capVal) - 1):
+                        #print >> sys.stdout, "spectrum:",spectrum[i]
+                        #print >> sys.stdout, "i value:",i
                         if i < 3:
                             delta.append(spectrum[i])
                         elif i < 8:
@@ -69,15 +69,16 @@ class Mindwave():
                             beta.append(spectrum[i])
                         else:
                             gamma.append(spectrum[i])
-                    self.outputMap['delta'] = mean(delta)
-                    self.outputMap['theta'] = mean(theta)
-                    self.outputMap['alpha'] = mean(alpha)
-                    self.outputMap['beta'] = mean(beta)
-                    self.outputMap['gamma'] = mean(gamma)
+                            
+                    self.outputMap['delta'] = mean(delta, axis=0)*1000
+                    self.outputMap['theta'] = mean(theta, axis=0)*1000
+                    self.outputMap['alpha'] = mean(alpha, axis=0)*1000
+                    self.outputMap['beta'] = mean(beta, axis=0)*1000
+                    self.outputMap['gamma'] = mean(gamma, axis=0)*1000
                     self.publish()
             else:
                 print >> sys.stdout, "no data sent...reconnecting......"
-                eegParser.write_serial("\xc2")
+                self.eegParser.write_serial("\xc2")
                 
     def publish(self):
         self.controlOutput.attention = self.outputMap['attention']
@@ -87,8 +88,8 @@ class Mindwave():
         self.controlOutput.theta = self.outputMap['theta']
         self.controlOutput.gamma = self.outputMap['gamma']
         self.controlOutput.delta = self.outputMap['delta']
-        print >> sys.stdout, "BrainWave Data", outputMap
-        self.controluPblisher.publish(self.controlOutput)
+        print >> sys.stdout, "BrainWave Data", self.outputMap
+        self.controlPublisher.publish(self.controlOutput)
 
 if __name__ == '__main__':
     try:

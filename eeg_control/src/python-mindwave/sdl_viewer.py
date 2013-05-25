@@ -43,8 +43,8 @@ while True:
 	if p.sending_data:
 		iteration+=1
 		
-                print >> sys.stdout, "attention:",p.current_attention
-                print >> sys.stdout, "meditation:",p.current_meditation
+                #print >> sys.stdout, "attention:",p.current_attention
+                #print >> sys.stdout, "meditation:",p.current_meditation
 	                
 		flen = 50
 			
@@ -56,7 +56,8 @@ while True:
 				
 			spectrum = mean(array(spectra),axis=0)
 			for i in range (flen-1):
-				value = float(spectrum[i]*1000) 
+				print >> sys.stdout, "i value:", i
+                                value = float(spectrum[i]*1000) 
 				if i<3:
 					color = deltaColor
 				elif i<8:
