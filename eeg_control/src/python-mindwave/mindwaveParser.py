@@ -14,6 +14,7 @@ import sys
 import roslib; roslib.load_manifest('EEGControlMsgs')
 from EEGControlMsgs.msg import *
 import time
+import rosbag
 
 class Mindwave():
     def __init__(self):
@@ -33,6 +34,7 @@ class Mindwave():
             }
         self.capVal = 50
         self.spectra = []
+        self.bag = rosbag.Bag('/home/robo/Projects/EEGDrone/bagFiles/eegData.bag','rw')
         
     def parse(self):
         while not rospy.is_shutdown():
@@ -90,10 +92,13 @@ class Mindwave():
         self.controlOutput.delta = self.outputMap['delta']
         print >> sys.stdout, "BrainWave Data", self.outputMap
         self.controlPublisher.publish(self.controlOutput)
-
+        print >> sys.stdout, "Bagging..."
+        self.bag.write('eeg/controlBag',self.controlOutput)
+        
 if __name__ == '__main__':
     try:
         control = Mindwave()
         control.parse()
     except rospy.ROSInterruptException:
+        bag.close()
         pass
