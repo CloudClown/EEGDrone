@@ -34,7 +34,7 @@ class Mindwave():
             }
         self.capVal = 50
         self.spectra = []
-        self.bag = rosbag.Bag('/home/robo/Projects/EEGDrone/bagFiles/eegData.bag','rw')
+        self.bag = rosbag.Bag('/home/robo/Projects/EEGDrone/bagFiles/eegData.bag','w')
         
     def parse(self):
         while not rospy.is_shutdown():
