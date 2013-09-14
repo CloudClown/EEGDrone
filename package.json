@@ -11,5 +11,5 @@
             "name":"Jackie Jin",
             "email":"liveaeon@gmail.com"
         },
-        "engines":["node >= 0.8.0"]
+        "engines":["node>=0.8.0"]
 }
